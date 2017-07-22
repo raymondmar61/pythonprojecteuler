@@ -2,7 +2,7 @@
 #https://projecteuler.net/thread=4
 #A Pythagorean triplet is a set of three natural numbers, a < b < c, for which, a^2 + b^2 = c^2.  For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2.
 #There exists exactly one Pythagorean triplet for which a + b + c = 1000.  Find the product abc.
-#In laments terms, find a, b, and c for which the a, b, and c sums to 1000.  The a, b, and c must satisfy a^2 + b^2 = c^2.  Take the a in a^2, b in b^2, and c in c^2, sum a, b, and c to equal 1000.
+#In laments terms, find a, b, and c for which the a, b, and c sums to 1000.  The a, b, and c must satisfy a^2 + b^2 = c^2.  Take the a in a^2, b in b^2, and c in c^2, sum a, b, and c to equal 1000.  3 + 4 + 5 = 12.
 
 # save it's good
 # for a in range(1,6):
@@ -49,7 +49,7 @@ for a in range(1,1000):
 			print(a * b * c)
 			break
 		else:
-			continue
+			continue  #answer is 200, 375, 425
 
 # online solution http://www.w3resource.com/euler-project/euler-problem9.php
 # for a in range(1, 1000):
