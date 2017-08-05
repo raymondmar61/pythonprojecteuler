@@ -26,91 +26,50 @@
 #The product of these numbers is 26 × 63 × 78 × 14 = 1788696
 #What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 
-#sum([3,4,5]) == 3 + 4 + 5 == 12
-#from functools import reduce # Valid in Python 2.6+, required in Python 3
-#import operator
-#reduce(operator.mul, (3, 4, 5), 1)
-from functools import reduce
-import operator
+#Solution source https://pythonandr.com/2015/08/28/largest-product-in-a-grid-project-euler-problem-11/
 
-#grid = [8, 2, 22, 97, 38, 15, 0]
-grid1 = [8, 2, 22, 97, 38, 15, 0]
-grid2 = [49, 49, 99, 40, 17, 81, 18]
-grid3 = [81, 49, 31, 73, 55, 79, 14]
-grid4 = [52, 70, 95, 23, 4, 60, 11]
-grid5 = [22, 31, 16, 71, 51, 67, 63]
-left = 0
-right = 4
-gridnumber = 1
-print(gridnumber)
-print(gridnumber+3)
-#print(grid+int((gridnumber)))
-#print(len(grid(gridnumber+3)))
-# while True:
-#     if right == len(grid(gridnumber)) - 2:
-#         break
-#     print(grid[left:right],grid2[left+1:right+1],grid3[left+2:right+2],grid4[left+3:right+3])
-#     gridsum = sum(grid[left:right])
-#     gridsum2 = sum(grid2[left+1:right+1])
-#     gridsum3 = sum(grid3[left+2:right+2])
-#     gridsum4 = sum(grid4[left+3:right+3])
-#     print(gridsum + gridsum2 + gridsum3 + gridsum4)
-#     left += 1
-#     right += 1
+from numpy import * #import numpy module for matrix operations
+filename = "011largestproductinagridtext.txt"
+newlines = []
+newlinesintegers = []
 
-#sum four diagonally top left to bottom right four grids
-# while True:
-#     if right == len(grid4) - 2:
-#         break
-#     print(grid[left:right],grid2[left+1:right+1],grid3[left+2:right+2],grid4[left+3:right+3])
-#     gridsum = sum(grid[left:right])
-#     gridsum2 = sum(grid2[left+1:right+1])
-#     gridsum3 = sum(grid3[left+2:right+2])
-#     gridsum4 = sum(grid4[left+3:right+3])
-#     print(gridsum + gridsum2 + gridsum3 + gridsum4)
-#     left += 1
-#     right += 1
+with open(filename, "r") as text_file:
+	lines = text_file.readlines()
+	print(lines) #each text file stores in a list or an array.  "\n" means new line
+	print("\n")
+# It appears I don't need a for loop to create a list.  The list is created in the with open statement.
+# for line in lines:
+# 	newlines.append(line)
+# print(newlines)
+# print("\n")
 
-#sum four diagonally top left to bottom right three grids
-# while True:
-#     if right == len(grid3) - 1:
-#         break
-#     print(grid[left:right],grid2[left+1:right+1],grid3[left+2:right+2])
-#     gridsum = sum(grid[left:right])
-#     gridsum2 = sum(grid2[left+1:right+1])
-#     gridsum3 = sum(grid3[left+2:right+2])
-#     print(gridsum + gridsum2 + gridsum3)
-#     left += 1
-#     right += 1
+#create a new list converts the number strings to number integers
+for i in lines:
+	j = i.split(" ")
+	k = [int(n) for n in j]
+	newlinesintegers.append(k)
+print(newlinesintegers)
+print("\n")
 
-#sum four diagonally top left to bottom right two grids
-# while True:
-#     if right == len(grid2):
-#         break
-#     print(grid[left:right],grid2[left+1:right+1])
-#     #print(sum(grid[left:right],grid2[left+1:right+1])) #error message
-#     gridsum = sum(grid[left:right])
-#     gridsum2 = sum(grid2[left+1:right+1])
-#     print(gridsum + gridsum2)
-#     left += 1
-#     right += 1
+#convert the list of integers into a matrix of integers.  Need numpy module
+problemmatrix = matrix(newlinesintegers)
+print(problemmatrix)
 
-# sum four across
-# while True:
-#     if right == len(grid) + 1:
-#         break
-#     print(grid[left:right])
-#     print(sum(grid[left:right]))
-#     left += 1
-#     right += 1
-
-# grid = [8, 2, 22, 97, 38, 15, 0]
-# left = 0
-# right = 4
-# while True:
-#     if right == len(grid) + 1:
-#         break
-#     print(grid[left:right])
-#     print(reduce(operator.mul, grid[left:right],1))    
-#     left += 1
-#     right += 1
+#set initial or initialize maximum product or answer to be a dummy number.  Choose 1
+maxproduct = 1
+#search all combinations for maximum product
+for i in range(0,16):
+    for j in range(0,16):
+        prod1 = problemmatrix[i,j]*problemmatrix[i+1,j]*problemmatrix[i+2,j]*problemmatrix[i+3,j]
+        if prod1 > maxproduct:
+            maxproduct = prod1
+        prod2 = problemmatrix[i,j]*problemmatrix[i,j+1]*problemmatrix[i,j+2]*problemmatrix[i,j+3]
+        if prod2 > maxproduct:
+            maxproduct = prod2
+        prod3 = problemmatrix[i,j]*problemmatrix[i+1,j+1]*problemmatrix[i+2,j+2]*problemmatrix[i+3,j+3]
+        if prod3 > maxproduct:
+            maxproduct = prod3
+        prod4 = problemmatrix[19-i,j]*problemmatrix[18-i,j+1]*problemmatrix[17-i,j+2]*problemmatrix[16-i,j+3]
+        if prod4 > maxproduct:
+            maxproduct = prod4
+print(maxproduct) #answer is 70600674
