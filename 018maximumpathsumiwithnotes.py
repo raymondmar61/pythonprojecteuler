@@ -51,7 +51,7 @@ for eachnewlinesintegers in newlinesintegers:
 print(maxnumber)
 """
 
-#Greatest total from top to bottom TRIANGLE SUM
+#TRIANGLE SUM
 from numpy import * #import numpy module for matrix operations
 #filename = "018maximumpathsumismalltriangle.txt"
 filename = "018maximumpathsumibigtriangle.txt"
@@ -60,14 +60,25 @@ newlinesintegers = []
 
 with open(filename, "r") as text_file:
 	lines = text_file.readlines()
+	#print(lines) #print ['3\n', '7 4\n', '2 4 6\n', '8 5 9 3']
 #create a new list converts the number strings to number integers
 for i in lines:
 	j = i.split(" ")
 	k = [int(n) for n in j]
 	newlinesintegers.append(k)
+# print(newlinesintegers) #print [[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]
+newlinesintegers = list(newlinesintegers)
+#print(type(newlinesintegers)) #<class 'list'>
+# print(newlinesintegers[0][0]) #print 3
+# print(newlinesintegers[1][0]) #print 7
+# print(newlinesintegers[2][2]) #print 6
+# print(newlinesintegers[3][1]) #print 5
+#print(len(newlinesintegers)) #print 4
 bottomrow = len(newlinesintegers)
+#print(len(newlinesintegers[bottomrow-1])) #print 4
 trianglesum = 0 #initialize trianglesum
 love = 0
+#trianglesum = newlinesintegers[0][0] #initialize trianglesum
 for i in range(0,bottomrow):
 	lengthpresentrow = len(newlinesintegers[i])
 	print("row index",newlinesintegers.index(newlinesintegers[i]))
@@ -100,6 +111,10 @@ for i in range(0,bottomrow):
 				print(belowright)
 				break
 		if i >= 2:
+			# if belowleft < 0:
+			# 	belowleft = 0
+			# if belowright > len(newlinesintegers[i]):
+			# 	belowright = belowright - 1
 			print("index",i,belowleft," ",newlinesintegers[i][belowleft])
 			print("index",i,belowright," ",newlinesintegers[i][belowright])
 			greaterleft = newlinesintegers[i][belowleft]
