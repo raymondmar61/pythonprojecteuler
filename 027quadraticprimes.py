@@ -30,30 +30,48 @@ def factornum(num):
 # 	if factornum((o**2)-(79*o)+1601) == "no":
 # 		print(o,"stop here first non prime number:",(o**2)-(79*o)+1601)
 # 		break
-loga = []
-logb = []
-logn = []
-for a in range(-1001,1001):
+maximumprimecounter = 0
+maximuma = 0
+maximumb = 0
+for a in range(-1000,1000):
 	for b in range(-1001,1001):
 		n=0
 		while True:
 			#print(a,b,n,":",(n**2)+(a*n)+b)
 			if factornum((n**2)+(a*n)+b) == "no":
-				loga.append(a)
-				logb.append(b)
-				logn.append(n)
+				if n >= maximumprimecounter:
+					maximuma = a
+					maximumb = b
+					maximumprimecounter = n
 				break
 			n+=1
-# print(loga)
-# print(logb)
-# print(logn)
-print("max",max(logn))
-# print("index",logn.index(max(logn)))
-maxindex = (logn.index(max(logn)))
-print("product a",loga[maxindex]) #-61
-print("product b",logb[maxindex]) #971
-print(loga[maxindex]*logb[maxindex]) #answer is -59231
-# allthree = zip(loga, logb, logn)
-# for x, y, z in allthree:
-# 	if z == max(logn):
-# 		print(x,y,z)
+print(maximuma, maximumb, maximumprimecounter)
+print(maximuma * maximumb) #answer is -59231
+
+# loga = []
+# logb = []
+# logn = []
+# for a in range(-1001,1001):
+# 	for b in range(-1001,1001):
+# 		n=0
+# 		while True:
+# 			#print(a,b,n,":",(n**2)+(a*n)+b)
+# 			if factornum((n**2)+(a*n)+b) == "no":
+# 				loga.append(a)
+# 				logb.append(b)
+# 				logn.append(n)
+# 				break
+# 			n+=1
+# # print(loga)
+# # print(logb)
+# # print(logn)
+# print("max",max(logn))
+# # print("index",logn.index(max(logn)))
+# maxindex = (logn.index(max(logn)))
+# print("product a",loga[maxindex]) #-61
+# print("product b",logb[maxindex]) #971
+# print(loga[maxindex]*logb[maxindex]) #answer is -59231
+# # allthree = zip(loga, logb, logn)
+# # for x, y, z in allthree:
+# # 	if z == max(logn):
+# # 		print(x,y,z)
