@@ -1,5 +1,5 @@
 #https://projecteuler.net/problem=35 Circular primes
-#https://projecteuler.net/thread=34
+#https://projecteuler.net/thread=35
 #The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
 #There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
 #How many circular primes are there below one million?
@@ -12,7 +12,8 @@ with open("primenumbers10000.txt","r") as fileobject:
 	#RM:  delete the last line break \n in text file for the conversion to work
 	primenumberslist = list((map(int,contents.split(","))))
 
-circularprimeslist = [2]
+circularprimeslist = []
+#circular rotate number
 def rotate(numberstring,length):
 	rotatenumberslist = []
 	primeanswerlist = []
@@ -30,17 +31,10 @@ def rotate(numberstring,length):
 	if len(primeanswerlist) == length:
  		circularprimeslist.append(numberstring)
 
-initialize = 3
-while initialize < 100000:
-	if initialize % 75 == 0:
-		print(initialize)
-	if initialize not in primenumberslist:
-		initialize = initialize + 2
-	else:
-		numberstring = str(initialize)
-		numberlength = len(numberstring)
-		rotate(numberstring,numberlength)
-		initialize = initialize + 2
+for eachprimenumberslist in primenumberslist:
+	numberstring = str(eachprimenumberslist)
+	numberlength = len(numberstring)
+	rotate(numberstring,numberlength)	
 print(circularprimeslist)
 print(len(circularprimeslist))
 # #2-100 13; 2-1000 25; 2-10000 33; 2-100000 43
