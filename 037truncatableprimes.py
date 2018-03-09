@@ -1,29 +1,28 @@
 #https://projecteuler.net/problem=37 Truncatable primes
-#https://projecteuler.net/thread=36
+#https://projecteuler.net/thread=37
 #The number 3797 has an interesting property. Being prime itself, it is possible to continuously remove digits from left to right, and remain prime at each stage: 3797, 797, 97, and 7. Similarly we can work from right to left: 3797, 379, 37, and 3.
 #Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
 #NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 import time
 startime = time.time()
-with open("primenumbers10000.txt","r") as fileobject:
+
+#read one million prime numbers text file excluding 2, 3, 5, 7
+with open("primenumbers1000000.txt","r") as fileobject:
 	contents = fileobject.read()
-	contents = contents.replace("\t",",")
-	contents = contents.replace("\n",",")
+	contents = contents.replace("         ",",")
+	contents = contents.replace("        ",",")
+	contents = contents.replace("       ",",")
+	contents = contents.replace("      ",",")
+	contents = contents.replace("     ",",")
+	contents = contents.replace("    ",",")
+	contents = contents.replace("   ",",")
+	contents = contents.replace("  ",",")	
 	#RM:  delete the last line break \n in text file for the conversion to work
+	#RM:  Word Wrap must be deactivated to check primenumbers50000.txt spacing.  Source:  https://www2.cs.arizona.edu/icon/oddsends/primes.htm.  Likewise for primenumbers1000000.txt check for number of spaces between prime numbers; there are no single spaces to replace.
 	primenumberslist = list((map(int,contents.split(","))))
 
-# with open("primenumbers50000.txt","r") as fileobject:
-# 	contents = fileobject.read()
-# 	contents = contents.replace("      ",",")
-# 	contents = contents.replace("     ",",")
-# 	contents = contents.replace("    ",",")
-# 	contents = contents.replace("   ",",")
-# 	contents = contents.replace("  ",",")
-# 	contents = contents.replace(" ",",")
-# 		#RM:  delete the last line break \n in text file for the conversion to work
-# 	primenumberslist = list((map(int,contents.split(","))))
-
-primeanswerlist = []
+#primeanswerlist preanswered 2, 3, 5, 7
+primeanswerlist = [2,3,5,7]
 #check number is prime
 def isprime(n):
 	if n == 1:
@@ -33,7 +32,7 @@ def isprime(n):
 			return False
 	return True
 
-#truncate the prime number function
+#truncate the prime number
 def truncate(number,numberlength):
 	truncatelist = []	
 	for n in range(0,numberlength):		
@@ -55,35 +54,11 @@ def truncate(number,numberlength):
 			primeanswerlist.append(number)
 		counter +=1
 
-# number = 3797
-# numberlength = len(str(number))
-# print(numberlength)
-# truncate(number,numberlength)
-# print(primeanswerlist)
-
-# for eachprimenumberslist in primenumberslist:
-# 	numberlength = len(str(eachprimenumberslist))
-# 	truncate(eachprimenumberslist,numberlength)
-# print(primeanswerlist) #[2, 3, 5, 7, 23, 37, 53, 73, 313, 317, 373, 797, 3137, 3797]  #incomplete answer at the moment 5 seconds
-
-
-# for eachprimenumberslist in primenumberslist:
-# 	eachprimenumberslist = str(eachprimenumberslist)
-# 	for eachprimenumber in eachprimenumberslist:
-# 		#first digit is prime number break for loop
-# 		if (eachprimenumber == "0") or (eachprimenumber == "1") or (eachprimenumber == "4") or (eachprimenumber == "6") or (eachprimenumber == "8"):
-# 			print(eachprimenumberslist+" is out")
-# 			break
-# 		else:
-# 			numberlength = len(str(eachprimenumberslist))
-# 			truncate(int(eachprimenumberslist),numberlength)
-# 			break
-
 for eachprimenumberslist in primenumberslist:
 	eachprimenumberslist = str(eachprimenumberslist)
 	eachprimenumberslistlastdigit = len(eachprimenumberslist)-1
 	#first digit or last digit is not prime number pass for loop
-	if (eachprimenumberslist[0] == "1") or (eachprimenumberslist[0] == "4") or (eachprimenumberslist[0] == "6") or (eachprimenumberslist[0] == "8") or (eachprimenumberslist[eachprimenumberslistlastdigit] == "1"):
+	if (eachprimenumberslist[0] == "1") or (eachprimenumberslist[0] == "4") or (eachprimenumberslist[0] == "6") or (eachprimenumberslist[0] == "8") or (eachprimenumberslist[0] == "9") or (eachprimenumberslist[eachprimenumberslistlastdigit] == "1") or (eachprimenumberslist[eachprimenumberslistlastdigit] == "9"):
 		#print(eachprimenumberslist+" is out")
 		pass
 	else:
@@ -91,7 +66,8 @@ for eachprimenumberslist in primenumberslist:
 		numberlength = len(str(eachprimenumberslist))
 		truncate(int(eachprimenumberslist),numberlength)
 		pass
-print(primeanswerlist) #[2, 3, 5, 7, 23, 37, 53, 73, 313, 317, 373, 797, 3137, 3797]  #incomplete answer at the moment.  3.06 seconds primenumbers10000.txt.  81.91 seconds primenumbers50000.txt.
+print(primeanswerlist) #print [2, 3, 5, 7, 23, 37, 53, 73, 313, 317, 373, 797, 3137, 3797, 739397]
+print(sum(primeanswerlist)-sum([2,3,5,7])) #print 748317
 endtime = time.time()
 print((endtime-startime),"seconds")
 print((round(endtime-startime)),"seconds")
