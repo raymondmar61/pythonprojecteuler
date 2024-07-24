@@ -1,4 +1,3 @@
-#okay to delete yes
 #https://zach.se/project-euler-solutions/26/
 def recurringdecimalcycle(numerator, denominator):
     #solve 10^start % denominator == 10^(start+length) % denominator
